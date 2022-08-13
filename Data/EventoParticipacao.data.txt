@@ -1,0 +1,1 @@
+[{"idEvento":3,"idUsuario":2,"participacaoCancelada":false,"id":1}]

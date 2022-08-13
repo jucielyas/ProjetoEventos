@@ -1,0 +1,1 @@
+[{"idCategoria":0,"idEndereco":0,"nome":"q","id":0},{"idCategoria":1,"idEndereco":1,"nome":"Teste","data":"Jun 5, 2023, 12:00:00 AM","descricao":"teste descricao","id":2},{"idCategoria":3,"idEndereco":1,"nome":"teste","data":"Feb 12, 2023, 12:00:00 AM","descricao":"teste","id":3}]
