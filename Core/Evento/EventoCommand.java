@@ -199,7 +199,7 @@ public class EventoCommand {
 		
 		System.out.println("-------- Meus Eventos ----------");
 		
-		Scanner opcaoEscolhidaMenu = new Scanner(System.in);
+		Scanner opcaoEscolhida = new Scanner(System.in);
 		
 		for (int i=0; i<(int)eventosPorUsuario.stream().count(); i++) 
 		{ 		
@@ -211,10 +211,20 @@ public class EventoCommand {
 		
 		System.out.println("Deseja cancelar a participação em algum evento? Digite o número. Ou aperte X para sair.");
 		
-		if(opcaoEscolhidaMenu.nextLine().toLowerCase().equals("x"))
-			Inicio.MenuOpcoes();
-	
+		String idEvento = opcaoEscolhida.nextLine();
 		
+		if(idEvento.toLowerCase().equals("x"))
+			Inicio.MenuOpcoes();
+		
+		var idEscolhido = Integer.parseInt(idEvento);
+		
+		eventoParticipacao.stream().filter(x -> x.idEvento == idEscolhido).forEach(l -> l.participacaoCancelada = true);
+		
+		var salvou = handlerEventoParticipacao.CreateEventoParticipacao(eventoParticipacao);
+		
+		System.out.println("Participação cancelada com sucesso!");
+		
+		ListaEventosPorIdUsuario();
 		
 	}
 	

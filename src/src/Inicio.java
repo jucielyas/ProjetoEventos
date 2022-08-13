@@ -62,6 +62,8 @@ public class Inicio {
 	    	new EventoCommand().FormEvento();
 	    if(opcaoEscolha == Utils.MenuOpcoes.ConsultaEventos.getValor())
 	    	new EventoCommand().EscolherEvento();
+	    if(opcaoEscolha == Utils.MenuOpcoes.MeusEventos.getValor())
+	    	new EventoCommand().ListaEventosPorIdUsuario();
 
 		return opcaoEscolha;
 	}

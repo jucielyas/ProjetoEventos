@@ -11,7 +11,7 @@ import DataIntegration.TxtService;
 
 public class EventoHandler {
 	private TxtService txtService;
-	private String entidade = "Evento.data.txt";
+	private String entidade = "Events.data.txt";
 	private Gson objJson = new Gson();
 	
 	public EventoHandler() {
