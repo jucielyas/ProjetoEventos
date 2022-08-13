@@ -18,15 +18,6 @@ public class EventoParticipacaoHandler {
 	public EventoParticipacaoHandler() {
 		txtService = new TxtService(entidade);
 	}
-	public List<Domain.Evento> ObterEventosPorIdUsuario() throws IOException {	
-		
-		String json = txtService.ObterLeituraArquivo();
-		
-		Type listType = new TypeToken<ArrayList<Domain.Evento>>(){}.getType();
-		List<Domain.Evento> lista = new Gson().fromJson(json, listType);
-		
-		return lista;
-	}
 	
 	public boolean CreateEventoParticipacao(List<Domain.EventoParticipacao> lista) throws IOException {
 		

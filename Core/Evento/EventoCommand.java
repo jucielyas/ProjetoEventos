@@ -18,12 +18,15 @@ import Domain.Usuario;
 import Endereco.EnderecoCommand;
 import Endereco.EnderecoHandler;
 import EventoParticipacao.EventoParticipacaoCommand;
+import EventoParticipacao.EventoParticipacaoHandler;
+import src.Global;
 import src.Inicio;
 
 public class EventoCommand {
 	private EventoHandler handler;
 	private CategoriaHandler handlerCategoria;
 	private EnderecoHandler handlerEndereco;
+	private EventoParticipacaoHandler handlerEventoParticipacao;
 	
 	private CategoriaCommand commandCategoria;
 	private EnderecoCommand commandEndereco;
@@ -38,6 +41,7 @@ public class EventoCommand {
 		handler = new EventoHandler();	
 		handlerCategoria = new CategoriaHandler();
 		handlerEndereco = new EnderecoHandler();
+		handlerEventoParticipacao = new EventoParticipacaoHandler();
 		
 		commandCategoria = new CategoriaCommand();
 		commandEndereco = new EnderecoCommand();
@@ -163,6 +167,56 @@ public class EventoCommand {
 	}
 	
 
+	public void ListaEventosPorIdUsuario() throws IOException, ParseException {
+		
+		eventoParticipacao = handlerEventoParticipacao.GetListParticipacao();
+		eventos = handler.GetList();
+		
+		if(eventoParticipacao == null)
+			eventoParticipacao = new ArrayList<EventoParticipacao>();
+		
+		if(eventos == null)
+			eventos = new ArrayList<Evento>();
+		
+		eventoParticipacao = eventoParticipacao.stream()
+			     .filter(item -> item.GetidUsuario() == Global.idUsuario && !item.participacaoCancelada).toList();
+		
+		List<Evento> eventosPorUsuario = new ArrayList<Evento>();
+		
+		for (int i=0; i<(int)eventoParticipacao.stream().count(); i++) 
+		{ 		
+			int idEvento = eventoParticipacao.get(i).GetidEvento();
+			var existeEvento = eventos.stream()
+				     .filter(item -> item.GetId() == idEvento).toList();	
+			
+			if(existeEvento != null)
+			{
+				var evento = existeEvento.get(0);
+				eventosPorUsuario.add(evento);
+			}
+		}
+		
+		
+		System.out.println("-------- Meus Eventos ----------");
+		
+		Scanner opcaoEscolhidaMenu = new Scanner(System.in);
+		
+		for (int i=0; i<(int)eventosPorUsuario.stream().count(); i++) 
+		{ 		
+			int idEvento = eventosPorUsuario.get(i).GetId();
+			String descEvento = eventosPorUsuario.get(i).GetDescricao();
+			String dataEvento = eventosPorUsuario.get(i).GetData().toString();
+			System.out.println(idEvento + " - "+ descEvento + " - " + dataEvento);		 
+		}
+		
+		System.out.println("Deseja cancelar a participação em algum evento? Digite o número. Ou aperte X para sair.");
+		
+		if(opcaoEscolhidaMenu.nextLine().toLowerCase().equals("x"))
+			Inicio.MenuOpcoes();
+	
+		
+		
+	}
 	
 
 	

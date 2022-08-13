@@ -15,7 +15,6 @@ public class Inicio {
 	public static void main(String[] args) throws IOException, ParseException {
 		
 		try {
-			System.out.println("--------- Cadastro de Usuário ---------- ");
 	
 			MenuOpcoes();
 		    
