@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -132,22 +133,22 @@ public class EventoCommand {
 			
 			enderecos = handlerEndereco.GetList();
 			Endereco endereco = enderecos.stream()
-				     .filter(item -> item.GetId() == result.idEndereco).toList().get(0);
+				     .filter(item -> item.GetId() == result.GetIdEndereco()).toList().get(0);
 			
 			categorias = handlerCategoria.GetList();
 			Categoria categoria = categorias.stream()
-				     .filter(item -> item.GetId() == result.idCategoria).toList().get(0);
+				     .filter(item -> item.GetId() == result.GetIdCategoria()).toList().get(0);
 			
 			System.out.println("Informações do evento:");
-			System.out.println(result.nome);
-			System.out.println(result.descricao);
-			System.out.println(result.data);
+			System.out.println(result.GetNome());
+			System.out.println(result.GetDescricao());
+			System.out.println(result.GetData());
 			
 			System.out.println("Endereço do evento:");
-			System.out.println(endereco.Rua+", "+endereco.Numero + ", "+ endereco.Bairro +" - "+ endereco.Cidade+" - "+ endereco.Estado);
+			System.out.println(endereco.GetRua()+", "+endereco.GetNumero() + ", "+ endereco.GetBairro() +" - "+ endereco.GetCidade()+" - "+ endereco.GetEstado());
 			
 			System.out.println("Categoria do evento:");
-			System.out.println(categoria.descricao);
+			System.out.println(categoria.GetDescricao());
 			
 			System.out.println("-");
 			System.out.println("-");
@@ -179,7 +180,7 @@ public class EventoCommand {
 			eventos = new ArrayList<Evento>();
 		
 		eventoParticipacao = eventoParticipacao.stream()
-			     .filter(item -> item.GetidUsuario() == Global.idUsuario && !item.participacaoCancelada).toList();
+			     .filter(item -> item.GetidUsuario() == Global.idUsuario && !item.GetparticipacaoCancelada()).toList();
 		
 		List<Evento> eventosPorUsuario = new ArrayList<Evento>();
 		
@@ -200,7 +201,7 @@ public class EventoCommand {
 		System.out.println("-------- Meus Eventos ----------");
 		
 		Scanner opcaoEscolhida = new Scanner(System.in);
-		
+		//eventosPorUsuario = eventosPorUsuario.stream().sorted(Comparator.comparingLong(Date::getTime));
 		for (int i=0; i<(int)eventosPorUsuario.stream().count(); i++) 
 		{ 		
 			int idEvento = eventosPorUsuario.get(i).GetId();
@@ -218,7 +219,7 @@ public class EventoCommand {
 		
 		var idEscolhido = Integer.parseInt(idEvento);
 		
-		eventoParticipacao.stream().filter(x -> x.idEvento == idEscolhido).forEach(l -> l.participacaoCancelada = true);
+		eventoParticipacao.stream().filter(x -> x.GetidEvento() == idEscolhido).forEach(l -> l.SetparticipacaoCancelada(true));
 		
 		var salvou = handlerEventoParticipacao.CreateEventoParticipacao(eventoParticipacao);
 		

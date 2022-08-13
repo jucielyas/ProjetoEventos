@@ -25,9 +25,9 @@ public class EventoParticipacaoCommand {
 			eventosParticipacao = new ArrayList<EventoParticipacao>();
 		
 		EventoParticipacao Novo = new EventoParticipacao();
-		Novo.id = ObterNovoIdParticipacao();
-		Novo.idEvento = idEvento;
-		Novo.idUsuario = Global.idUsuario;
+		Novo.SetId(ObterNovoIdParticipacao());
+		Novo.SetidEvento(idEvento);
+		Novo.SetidUsuario(Global.idUsuario);
 		
 		eventosParticipacao.add(Novo);
 		

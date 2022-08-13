@@ -2,11 +2,11 @@ package Domain;
 import java.util.Date;
 
 public class Evento  extends Base  {
-	public int idCategoria;
-	public int idEndereco;
-	public String nome;
-	public Date  data;
-	public String descricao;
+	private int idCategoria;
+	private int idEndereco;
+	private String nome;
+	private Date  data;
+	private String descricao;
 	
 	
 	public void SetIdCategoria(int idCategoria) {

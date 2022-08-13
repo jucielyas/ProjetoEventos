@@ -1,9 +1,9 @@
 package Domain;
 
 public class EventoParticipacao extends Base {
-	public int idEvento;
-	public int idUsuario;
-	public boolean participacaoCancelada;
+	private int idEvento;
+	private int idUsuario;
+	private boolean participacaoCancelada;
 	
 	public void SetidEvento(int idEvento) {
 	    this.idEvento = idEvento;

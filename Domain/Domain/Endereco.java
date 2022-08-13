@@ -1,11 +1,11 @@
 package Domain;
 
 public class Endereco extends Base {
-	public String Rua;
-	public String Bairro;
-	public String Cidade;
-	public String Estado;
-	public int Numero;
+	private String Rua;
+	private String Bairro;
+	private String Cidade;
+	private String Estado;
+	private int Numero;
 	
 	
 	public void SetRua(String Rua) {

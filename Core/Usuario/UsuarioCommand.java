@@ -86,7 +86,7 @@ public class UsuarioCommand {
 			     .filter(item -> item.GetEmail().equals(email) && item.GetSenha().equals(senha)).toList();
 		
 		if(usuarioExistente.size() > 0)
-			idUsuario = usuarioExistente.get(0).id; 
+			idUsuario = usuarioExistente.get(0).GetId(); 
 		else
 			System.out.println("Email ou Senha incorretos. Por favor, tente novamente.");
 			     

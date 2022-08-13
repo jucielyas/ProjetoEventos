@@ -1,7 +1,7 @@
 package Domain;
 
 public class Categoria extends Base {
-	public String descricao;
+	private String descricao;
 	
 	public void SetDescricao(String descricao) {
 	    this.descricao = descricao;

@@ -1,7 +1,7 @@
 package Domain;
 
 public class Base {
-	public int id;
+	private int id;
 	
 	
 	public void SetId(int id) {
