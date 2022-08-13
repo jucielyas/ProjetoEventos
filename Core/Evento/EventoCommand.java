@@ -209,15 +209,19 @@ public class EventoCommand {
 		Scanner opcaoEscolhida = new Scanner(System.in);
 		//eventosPorUsuario = eventosPorUsuario.stream().sorted(Comparator.comparingLong(Date::getTime));
 	
-		
-		
-	  
+		List<Evento> eventosOrdenados = new ArrayList<Evento>();
 		
 		for (int i=0; i<(int)eventosPorUsuario.stream().count(); i++) 
 		{ 		
-			int idEvento = eventosPorUsuario.get(i).GetId();
-			String descEvento = eventosPorUsuario.get(i).GetDescricao();
-			String dataEvento = eventosPorUsuario.get(i).GetData().toString();
+			eventosOrdenados.add(eventosPorUsuario.get(i))	 ;
+		}
+		
+		Collections.sort(eventosOrdenados, (emp1, emp2) -> emp1.GetData().compareTo(emp2.GetData()));
+		for (int i=0; i<(int)eventosOrdenados.stream().count(); i++) 
+		{ 		
+			int idEvento = eventosOrdenados.get(i).GetId();
+			String descEvento = eventosOrdenados.get(i).GetDescricao();
+			String dataEvento = eventosOrdenados.get(i).GetData().toString();
 			System.out.println(idEvento + " - "+ descEvento + " - " + dataEvento);		 
 		}
 		

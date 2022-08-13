@@ -23,6 +23,10 @@ public class EnderecoCommand {
 		Scanner opcaoEscolhidaMenu = new Scanner(System.in);
 		Domain.Endereco Novo = new Domain.Endereco();	
 		
+		enderecos = handler.GetList();
+		if(enderecos == null)
+			enderecos = new ArrayList<Endereco>();
+		
 		System.out.println("Informe o endereço do evento:");
 		
 		System.out.println("Cidade:");
