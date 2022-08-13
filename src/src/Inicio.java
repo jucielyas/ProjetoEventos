@@ -43,6 +43,7 @@ public class Inicio {
 			System.out.println(Utils.MenuOpcoes.CadastroCategoriaEvento.getValor() + " - Cadastro categoria Eventos");
 			System.out.println(Utils.MenuOpcoes.ConsultaEventos.getValor() + " - Consulta de Eventos");
 			System.out.println(Utils.MenuOpcoes.MeusEventos.getValor() + " - Meus eventos");
+			System.out.println(Utils.MenuOpcoes.EventosOcorridos.getValor() + " - Eventos já ocorridos");
 			
 			opcaoEscolhida = opcaoEscolhidaMenu.nextLine();
 			String numeroEscolhido = opcaoEscolhida;
@@ -64,6 +65,8 @@ public class Inicio {
 	    	new EventoCommand().EscolherEvento();
 	    if(opcaoEscolha == Utils.MenuOpcoes.MeusEventos.getValor())
 	    	new EventoCommand().ListaEventosPorIdUsuario();
+	    if(opcaoEscolha == Utils.MenuOpcoes.EventosOcorridos.getValor())
+	    	new EventoCommand().EventosOcorridos();
 
 		return opcaoEscolha;
 	}

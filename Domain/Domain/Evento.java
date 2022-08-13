@@ -43,6 +43,7 @@ public class Evento  extends Base  {
 	public Date GetData() {
 	    return this.data;  
 	  }
+	
 	public String GetDescricao() {
 	    return this.descricao;
 	  }

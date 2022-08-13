@@ -2,7 +2,7 @@ package Utils;
 import java.util.stream.*;
 
 public enum MenuOpcoes {
-	CadastroUsuario(1), CadastroEvento(2), CadastroCategoriaEvento(3), ConsultaEventos(4), MeusEventos(5);
+	CadastroUsuario(1), CadastroEvento(2), CadastroCategoriaEvento(3), ConsultaEventos(4), MeusEventos(5),  EventosOcorridos(6);
 	
 	private final int valor;
 	MenuOpcoes(int valorOpcao){

@@ -4,25 +4,18 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
-import Categoria.CategoriaCommand;
-import Categoria.CategoriaHandler;
-import Domain.Categoria;
-import Domain.Endereco;
-import Domain.Evento;
-import Domain.EventoParticipacao;
-import Domain.Usuario;
-import Endereco.EnderecoCommand;
-import Endereco.EnderecoHandler;
-import EventoParticipacao.EventoParticipacaoCommand;
-import EventoParticipacao.EventoParticipacaoHandler;
-import src.Global;
-import src.Inicio;
+import Categoria.*;
+import Domain.*;
+import Endereco.*;
+import EventoParticipacao.*;
+import Utils.Helpers;
+import src.*;
 
 public class EventoCommand {
 	private EventoHandler handler;
@@ -70,8 +63,8 @@ public class EventoCommand {
 		System.out.println("Nome do evento: ");
 		Novo.SetNome(opcaoEscolhidaMenu.nextLine());
 		
-		System.out.println("Data do evento:  (Por favor escrever no formato dd/MM/yyyy)");
-		Date data = new SimpleDateFormat("dd/MM/yyyy").parse(opcaoEscolhidaMenu.nextLine());  
+		System.out.println("Data e Hora do evento:  (Por favor escrever no formato dd/MM/yyyy 00:00)");
+		Date data = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(opcaoEscolhidaMenu.nextLine());  
 		Novo.SetData(data);
 		
 		System.out.println("Descrição do evento: ");
@@ -117,13 +110,7 @@ public class EventoCommand {
 			
 			Collections.sort(eventos, (emp1, emp2) -> emp1.GetData().compareTo(emp2.GetData()));
 			
-			for (int i=0; i<(int)eventos.stream().count(); i++) 
-			{ 		
-				int idEvento = eventos.get(i).GetId();
-				String descEvento = eventos.get(i).GetDescricao();
-				String dataEvento = eventos.get(i).GetData().toString();
-				System.out.println(idEvento + " - "+ descEvento + " - "+ dataEvento);		 
-			}
+			ExibicaoEventos(eventos);
 						
 			idEventoEscolhido = Integer.parseInt(opcaoEscolhidaMenu.nextLine());
 			if(idEventoEscolhido == 0)
@@ -207,7 +194,6 @@ public class EventoCommand {
 		System.out.println("-------- Meus Eventos ----------");
 		
 		Scanner opcaoEscolhida = new Scanner(System.in);
-		//eventosPorUsuario = eventosPorUsuario.stream().sorted(Comparator.comparingLong(Date::getTime));
 	
 		List<Evento> eventosOrdenados = new ArrayList<Evento>();
 		
@@ -217,13 +203,7 @@ public class EventoCommand {
 		}
 		
 		Collections.sort(eventosOrdenados, (emp1, emp2) -> emp1.GetData().compareTo(emp2.GetData()));
-		for (int i=0; i<(int)eventosOrdenados.stream().count(); i++) 
-		{ 		
-			int idEvento = eventosOrdenados.get(i).GetId();
-			String descEvento = eventosOrdenados.get(i).GetDescricao();
-			String dataEvento = eventosOrdenados.get(i).GetData().toString();
-			System.out.println(idEvento + " - "+ descEvento + " - " + dataEvento);		 
-		}
+		ExibicaoEventos(eventosOrdenados);
 		
 		System.out.println("Deseja cancelar a participação em algum evento? Digite o número. Ou aperte X para sair.");
 		
@@ -245,6 +225,62 @@ public class EventoCommand {
 	}
 	
 
+	public void EventosOcorridos() throws IOException, ParseException {
+		
+		Scanner opcaoEscolhidaMenu = new Scanner(System.in);
+		
+		eventos = handler.GetList();
+		if(eventos == null)
+			eventos = new ArrayList<Evento>();
+		
+		Date data = new Date(System.currentTimeMillis());
+		
+		List<Evento> eventosOcorridos = new ArrayList<Evento>();
+		eventosOcorridos.addAll(eventos.stream().filter(l -> l.GetData().before(data)).toList());	
+		
+		if(eventosOcorridos.stream().count() == 0)
+		{
+			System.out.println("Não há eventos já ocorridos ainda.");
+			Inicio.MenuOpcoes();
+		}
+		
+		Collections.sort(eventosOcorridos, (emp1, emp2) -> emp1.GetData().compareTo(emp2.GetData()));
+		
+		ExibicaoEventos(eventosOcorridos);
+		
+		System.out.println("Aperte X para voltar.");
+		
+		String idEvento = opcaoEscolhidaMenu.nextLine();
+		
+		if(idEvento.toLowerCase().equals("x"))
+			Inicio.MenuOpcoes();
+		
+	}
+	
+	
+	public void ExibicaoEventos(List<Evento> eventos) throws ParseException {
+		Date dataAtual = new Date(System.currentTimeMillis());
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		for (int i=0; i<(int)eventos.stream().count(); i++) 
+		{ 		
+			String ocorrendoAgora = "";
+			int idEvento = eventos.get(i).GetId();
+			String descEvento = eventos.get(i).GetDescricao();
+			String dataEvento = Helpers.ToDateTimeFormatParse(eventos.get(i).GetData());
+			
+			String dataEventoFormatData = Helpers.ToDateFormatParse(eventos.get(i).GetData());
+			String dataAtualFormatData = Helpers.ToDateFormatParse(dataAtual);
+			
+			if(dataAtualFormatData.equals(dataEventoFormatData))
+				ocorrendoAgora = " - Ocorrendo hoje";
+			
+			System.out.println(idEvento + " - "+ descEvento + " - "+ dataEvento + ocorrendoAgora);
+			
+			ocorrendoAgora = "";
+		}
+	
+	}
+	
 	
 	public int ObterNovoId() {
 		if(eventos == null)
