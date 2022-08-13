@@ -38,17 +38,17 @@ public class Inicio {
 		}
 		do {
 		
-		System.out.println("--------- Escolha uma opção e digite o número ---------- ");
-		System.out.println(Utils.MenuOpcoes.CadastroEvento.getValor() + " - Cadastro de Evento");
-		System.out.println(Utils.MenuOpcoes.CadastroCategoriaEvento.getValor() + " - Cadastro categoria Eventos");
-		System.out.println(Utils.MenuOpcoes.ConsultaEventos.getValor() + " - Consulta de Eventos");
-		System.out.println(Utils.MenuOpcoes.MeusEventos.getValor() + " - Meus eventos");
-		
-		opcaoEscolhida = opcaoEscolhidaMenu.nextLine();
-		String numeroEscolhido = opcaoEscolhida;
-		
-		opcao = (int)Utils.MenuOpcoes.stream()
-        .filter(d -> Integer.toString(d.getValor()).equals(numeroEscolhido)).count();
+			System.out.println("--------- Escolha uma opção e digite o número ---------- ");
+			System.out.println(Utils.MenuOpcoes.CadastroEvento.getValor() + " - Cadastro de Evento");
+			System.out.println(Utils.MenuOpcoes.CadastroCategoriaEvento.getValor() + " - Cadastro categoria Eventos");
+			System.out.println(Utils.MenuOpcoes.ConsultaEventos.getValor() + " - Consulta de Eventos");
+			System.out.println(Utils.MenuOpcoes.MeusEventos.getValor() + " - Meus eventos");
+			
+			opcaoEscolhida = opcaoEscolhidaMenu.nextLine();
+			String numeroEscolhido = opcaoEscolhida;
+			
+			opcao = (int)Utils.MenuOpcoes.stream()
+	        .filter(d -> Integer.toString(d.getValor()).equals(numeroEscolhido)).count();
 		
 		}while(!Helpers.isNumeric(opcaoEscolhida) || opcao == 0);
 		

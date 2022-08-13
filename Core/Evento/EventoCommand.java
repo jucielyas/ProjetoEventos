@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -58,7 +59,9 @@ public class EventoCommand {
 	
 		Scanner opcaoEscolhidaMenu = new Scanner(System.in);
 		
-		eventos = handler.GetList();		
+		eventos = handler.GetList();
+		if(eventos == null)
+			eventos = new ArrayList<Evento>();
 		
 		Domain.Evento Novo = new Domain.Evento();
 		
@@ -112,11 +115,14 @@ public class EventoCommand {
 		do {
 			System.out.println("0 - Voltar ao menu principal");
 			
+			Collections.sort(eventos, (emp1, emp2) -> emp1.GetData().compareTo(emp2.GetData()));
+			
 			for (int i=0; i<(int)eventos.stream().count(); i++) 
 			{ 		
 				int idEvento = eventos.get(i).GetId();
 				String descEvento = eventos.get(i).GetDescricao();
-				System.out.println(idEvento + " - "+ descEvento);		 
+				String dataEvento = eventos.get(i).GetData().toString();
+				System.out.println(idEvento + " - "+ descEvento + " - "+ dataEvento);		 
 			}
 						
 			idEventoEscolhido = Integer.parseInt(opcaoEscolhidaMenu.nextLine());
@@ -202,6 +208,11 @@ public class EventoCommand {
 		
 		Scanner opcaoEscolhida = new Scanner(System.in);
 		//eventosPorUsuario = eventosPorUsuario.stream().sorted(Comparator.comparingLong(Date::getTime));
+	
+		
+		
+	  
+		
 		for (int i=0; i<(int)eventosPorUsuario.stream().count(); i++) 
 		{ 		
 			int idEvento = eventosPorUsuario.get(i).GetId();

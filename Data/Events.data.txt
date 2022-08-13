@@ -1,0 +1,1 @@
+[{"idCategoria":1,"idEndereco":2,"nome":"teste","data":"Apr 25, 2025, 12:00:00 AM","descricao":"teste","id":1},{"idCategoria":1,"idEndereco":1,"nome":"teste2","data":"May 25, 2023, 12:00:00 AM","descricao":"teste2","id":2},{"idCategoria":1,"idEndereco":1,"nome":"teste3","data":"Jun 24, 2024, 12:00:00 AM","descricao":"teste3","id":3}]

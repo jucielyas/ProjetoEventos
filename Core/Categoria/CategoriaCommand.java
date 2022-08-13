@@ -22,6 +22,8 @@ public class CategoriaCommand {
 		Scanner opcaoEscolhidaMenu = new Scanner(System.in);
 		
 		categorias = handler.GetList();
+		if(categorias == null)
+			categorias = new ArrayList<Categoria>();
 		
 		Domain.Categoria Novo = new Domain.Categoria();
 		
@@ -50,6 +52,9 @@ public class CategoriaCommand {
 		Scanner opcaoEscolhidaMenu = new Scanner(System.in);
 		int idCategoriaEscolhida = 0;
 		categorias = handler.GetList();
+		
+		if(categorias == null)
+			categorias = new ArrayList<Categoria>();
 		
 		System.out.println("Escolha a Categoria:");
 		
