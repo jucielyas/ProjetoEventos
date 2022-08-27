@@ -11,7 +11,7 @@ public class TxtService {
 	private String CaminhoArquivo = "";
 	
 	public TxtService(String entidade) {
-		CaminhoArquivo = file.getAbsoluteFile().toString()+ "\\Data\\"+entidade;
+		CaminhoArquivo = file.getAbsoluteFile().toString()+ "\\ProjetoEventos\\Data\\"+entidade;
 	}
 	
 	public boolean GravarArquivo(String json) throws IOException {

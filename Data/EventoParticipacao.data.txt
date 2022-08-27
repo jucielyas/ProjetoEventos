@@ -1,1 +1,1 @@
-[{"idEvento":2,"idUsuario":2,"participacaoCancelada":false,"id":1},{"idEvento":3,"idUsuario":2,"participacaoCancelada":false,"id":2},{"idEvento":1,"idUsuario":2,"participacaoCancelada":false,"id":3}]
+[{"idEvento":3,"idUsuario":4,"participacaoCancelada":true,"id":2}]

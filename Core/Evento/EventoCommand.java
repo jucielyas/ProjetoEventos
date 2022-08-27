@@ -110,7 +110,8 @@ public class EventoCommand {
 			
 			Collections.sort(eventos, (emp1, emp2) -> emp1.GetData().compareTo(emp2.GetData()));
 			
-			ExibicaoEventos(eventos);
+			Date dataAtual = new Date(System.currentTimeMillis());
+			ExibicaoEventos(eventos.stream().filter(x -> x.GetData().equals(dataAtual) || x.GetData().after(dataAtual)).toList());
 						
 			idEventoEscolhido = Integer.parseInt(opcaoEscolhidaMenu.nextLine());
 			if(idEventoEscolhido == 0)
@@ -159,7 +160,6 @@ public class EventoCommand {
 		
 		return idEventoEscolhido;
 	}
-	
 
 	public void ListaEventosPorIdUsuario() throws IOException, ParseException {
 		
@@ -222,8 +222,7 @@ public class EventoCommand {
 		
 		ListaEventosPorIdUsuario();
 		
-	}
-	
+	}	
 
 	public void EventosOcorridos() throws IOException, ParseException {
 		
@@ -257,7 +256,6 @@ public class EventoCommand {
 		
 	}
 	
-	
 	public void ExibicaoEventos(List<Evento> eventos) throws ParseException {
 		Date dataAtual = new Date(System.currentTimeMillis());
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -280,7 +278,6 @@ public class EventoCommand {
 		}
 	
 	}
-	
 	
 	public int ObterNovoId() {
 		if(eventos == null)
